@@ -6,115 +6,57 @@
 /*   By: schennal <schennal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 18:15:22 by schennal          #+#    #+#             */
-/*   Updated: 2024/08/13 19:04:51 by schennal         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-
-// #include <iostream>
-// #include "Array.hpp"
-
-// #define MAX_VAL 750
-// int main(int, char**)
-// {
-//     Array<int> numbers(MAX_VAL);
-//     int* mirror = new int[MAX_VAL];
-//     srand(time(NULL));
-//     for (int i = 0; i < MAX_VAL; i++)
-//     {
-//         const int value = rand();
-//         numbers[i] = value;
-//         mirror[i] = value;
-//     }
-//     //SCOPE
-//     {
-//         Array<int> tmp = numbers;
-//         Array<int> test(tmp);
-//     }
-
-//     for (int i = 0; i < MAX_VAL; i++)
-//     {
-//         if (mirror[i] != numbers[i])
-//         {
-//             std::cerr << "didn't save the same value!!" << std::endl;
-//             return 1;
-//         }
-//     }
-//     try
-//     {
-//         numbers[-2] = 0;
-//     }
-//     catch(const std::exception& e)
-//     {
-//         std::cerr << e.what() << '\n';
-//     }
-//     try
-//     {
-//         numbers[MAX_VAL] = 0;
-//     }
-//     catch(const std::exception& e)
-//     {
-//         std::cerr << e.what() << '\n';
-//     }
-
-//     for (int i = 0; i < MAX_VAL; i++)
-//     {
-//         numbers[i] = rand();
-//     }
-//     delete [] mirror;//
-//     return 0;
-// }
-
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: anmohamm <anmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/10 18:24:50 by anmohamm          #+#    #+#             */
-/*   Updated: 2024/07/11 16:31:10 by anmohamm         ###   ########.fr       */
+/*   Updated: 2024/08/14 16:19:56 by schennal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Array.hpp"
 
-int main()
-{
-	Array<int> empty;
+int main() {
+	std::cout << CYAN << "------------------------------------------" << DEFAULT << std::endl;
+	std::cout << GREEN << "Test default constructor" << DEFAULT << std::endl;
+    Array<int> arr1;
+    std::cout << "arr1 size: " << arr1.size() << std::endl;
+	std::cout << CYAN << "------------------------------------------" << DEFAULT << std::endl;
 
-	Array<int> a(5);
-	Array<int> b(5);
-	Array<int> d;
+	std::cout << GREEN << "Test constructor with size" << DEFAULT << std::endl;
+    Array<int> arr2(5);
+    std::cout << "arr2 size: " << arr2.size() << std::endl;
+    for (int i = 0; i < 5; i++) {
+        arr2[i] = i * 2;
+    }
+    for (int i = 0; i < 5; i++) {
+        std::cout << "arr2[" << i << "] = " << arr2[i] << std::endl;
+    }
+	std::cout << CYAN << "------------------------------------------" << DEFAULT << std::endl;
 
-	for (unsigned int i = 0; i < a.size(); i++)
-		a[i] = i;
-	
-	for (unsigned int i = 0; i < b.size(); i++)
-		b[i] = i + 5;
+	std::cout << GREEN << "Test copy constructor" << DEFAULT << std::endl;
+    Array<int> arr3(arr2);
+    std::cout << "arr3 size: " << arr3.size() << std::endl;
+    for (int i = 0; i < 5; i++) {
+        std::cout << "arr3[" << i << "] = " << arr3[i] << std::endl;
+    }
+	std::cout << CYAN << "------------------------------------------" << DEFAULT << std::endl;
 
-	Array<int> c(b);
+	std::cout << GREEN << "Test assignment operator" << DEFAULT << std::endl;
+    Array<int> arr4;
+    arr4 = arr2;
+    std::cout << "arr4 size: " << arr4.size() << std::endl;
+    for (int i = 0; i < 5; i++) {
+        std::cout << "arr4[" << i << "] = " << arr4[i] << std::endl;
+    }
+	std::cout << CYAN << "------------------------------------------" << DEFAULT << std::endl;
 
-	for (unsigned int i = 0; i < a.size(); i++)
-		std::cout << a[i] << " ";
-	std::cout << std::endl;
+	std::cout << GREEN << "Test out-of-bounds access" << DEFAULT << std::endl;
+    try {
+        std::cout << "arr2[10] = " << arr2[10] << std::endl;
+    } catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+    }
+	std::cout << CYAN << "------------------------------------------" << DEFAULT << std::endl;
 
-	for (unsigned int i = 0; i < b.size(); i++)
-		std::cout << b[i] << " ";
-	std::cout << std::endl;
-
-	for (unsigned int i = 0; i < c.size(); i++)
-		std::cout << c[i] << " ";
-	std::cout << std::endl;
-
-	try
-	{
-		std::cout << a[5] << std::endl;
-	}
-	catch (std::exception &e)
-	{
-		std::cerr << e.what() << std::endl;
-	}
-
-	return (0);
+    return 0;
 }
+
+
+
